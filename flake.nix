@@ -194,11 +194,13 @@
             }
 
             def fetch-release [repository: string]: nothing -> list {
-              let release = try { http get $"https://api.github.com/repos/($repository)/releases/latest" } catch { |err|
-                print --stderr $"($repository): /releases/latest failed"
+              let release = try { http get $"https://api.github.com/repos/($repository)/releases" } catch { |err|
+                print --stderr $"($repository): /releases failed"
                 print --stderr $err.rendered
                 exit 1
               }
+
+              let release = $release | first
 
               $release.assets
               | each {|asset| {
