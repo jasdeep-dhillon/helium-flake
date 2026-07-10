@@ -1,20 +1,19 @@
 # helium-flake
 
-A Nix flake for [Helium](https://github.com/imputnet/helium), a private, fast,
-and honest web browser
+A Nix flake for [Helium](https://github.com/imputnet/helium), a private, fast, and honest web browser
 
 ## Usage
 
 ### Run directly
 
 ```bash
-nix run github:amaanq/helium-flake
+nix run github:Jasdeep-Dhillon/helium-flake
 ```
 
 ### Install to profile
 
 ```bash
-nix profile install github:amaanq/helium-flake
+nix profile install github:Jasdeep-Dhillon/helium-flake
 ```
 
 ### Add to NixOS configuration
@@ -88,6 +87,12 @@ To manually update to the newest release:
 
 3. Commit & Push:
    `git add versions.json && git commit --message "Update versions" && git push`
+
+## Technologies
+
+- **Nix Flakes** - Declarative package management
+- **Nushell** - Update script for fetching release metadata
+- **Supported Systems**: x86_64-linux, aarch64-linux, x86_64-darwin, aarch64-darwin
 
 ## License
 
