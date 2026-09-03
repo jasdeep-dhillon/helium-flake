@@ -3,24 +3,48 @@
     "version": "0.16.6.1",
     "url": "https://github.com/imputnet/helium-linux/releases/download/0.16.6.1/helium-0.16.6.1-arm64_linux.tar.xz",
     "hash": "sha256-geKUvsOEoU1ZUdkopxHTwdbiD1rNq4RKQ8kqxMsfvRs=",
-    "etag": "\"0x8DF0DF9EDADB063\""
+    "etag": "\"0x8DF0DF9EDADB063\"",
+    "beta": {
+      "version": "0.17.0.1",
+      "url": "https://github.com/imputnet/helium-linux/releases/download/0.17.0.1/helium-0.17.0.1-arm64_linux.tar.xz",
+      "hash": "sha256-TEHiKly+KFS8O9Rap6dLzhYIf3J/j2WtZRx7oauEtG8=",
+      "etag": "\"0x8DF0ECC4F58CB62\""
+    }
   },
   "x86_64-linux": {
     "version": "0.16.6.1",
     "url": "https://github.com/imputnet/helium-linux/releases/download/0.16.6.1/helium-0.16.6.1-x86_64_linux.tar.xz",
     "hash": "sha256-EAN0S0/5d5fH090S2ov3QnjF9Ok+kfFbQRtXr8/8LzE=",
-    "etag": "\"0x8DF0DF9ED582872\""
-  },
-  "x86_64-darwin": {
-    "version": "0.16.6.1",
-    "url": "https://github.com/imputnet/helium-macos/releases/download/0.16.6.1/helium_0.16.6.1_x86_64-macos.dmg",
-    "hash": "sha256-3354/AE7pPl8AnlMqTuJZ+YJfAYIi0c/9frde/Jm3qs=",
-    "etag": "\"0x8DF0E1618E0C344\""
+    "etag": "\"0x8DF0DF9ED582872\"",
+    "beta": {
+      "version": "0.17.0.1",
+      "url": "https://github.com/imputnet/helium-linux/releases/download/0.17.0.1/helium-0.17.0.1-x86_64_linux.tar.xz",
+      "hash": "sha256-UCOINeiJYlPUrxQqMDI1QRnB5vfnd5JsRTAZXHFP8/U=",
+      "etag": "\"0x8DF0ECC4F4DB44B\""
+    }
   },
   "aarch64-darwin": {
     "version": "0.16.6.1",
     "url": "https://github.com/imputnet/helium-macos/releases/download/0.16.6.1/helium_0.16.6.1_arm64-macos.dmg",
     "hash": "sha256-N3tVzdYFTIyzxr6aG2sAjYyTYrXvhKoenc+JPvfL5Lg=",
-    "etag": "\"0x8DF0E1618F5E12A\""
+    "etag": "\"0x8DF0E1618F5E12A\"",
+    "beta": {
+      "version": "0.16.6.1",
+      "url": "https://github.com/imputnet/helium-macos/releases/download/0.16.6.1/helium_0.16.6.1_arm64-macos.dmg",
+      "hash": "sha256-N3tVzdYFTIyzxr6aG2sAjYyTYrXvhKoenc+JPvfL5Lg=",
+      "etag": "\"0x8DF0E1618F5E12A\""
+    }
+  },
+  "x86_64-darwin": {
+    "version": "0.16.6.1",
+    "url": "https://github.com/imputnet/helium-macos/releases/download/0.16.6.1/helium_0.16.6.1_x86_64-macos.dmg",
+    "hash": "sha256-3354/AE7pPl8AnlMqTuJZ+YJfAYIi0c/9frde/Jm3qs=",
+    "etag": "\"0x8DF0E1618E0C344\"",
+    "beta": {
+      "version": "0.16.6.1",
+      "url": "https://github.com/imputnet/helium-macos/releases/download/0.16.6.1/helium_0.16.6.1_x86_64-macos.dmg",
+      "hash": "sha256-3354/AE7pPl8AnlMqTuJZ+YJfAYIi0c/9frde/Jm3qs=",
+      "etag": "\"0x8DF0E1618E0C344\""
+    }
   }
 }
