@@ -47,6 +47,15 @@
             inherit perSystem;
             withWidevine = true;
           };
+          helium-beta = pkgs.callPackage ./package.nix {
+            inherit perSystem;
+            betaRelease = true;
+          };
+          helium-widevine-beta = pkgs.callPackage ./package.nix {
+            inherit perSystem;
+            betaRelease = true;
+            withWidevine = true;
+          };
           default = self.packages.${pkgs.stdenv.hostPlatform.system}.helium;
         }))
 
@@ -55,62 +64,96 @@
             #!${getExe pkgs.nushell}
 
             def asset-to-system [name: string]: nothing -> any {
-              let row = $name | parse --regex '(?<arch>x86_64|arm64)[-_](?<os>linux|macos)\.(?:tar\.xz|dmg)$' | first
-              let arch = if $row.arch == "arm64" { "aarch64" } else { "x86_64" }
-              let os = if $row.os == "macos" { "darwin" } else { "linux" }
-              $"($arch)-($os)"
+                let row = $name | parse --regex '(?<arch>x86_64|arm64)[-_](?<os>linux|macos)\.(?:tar\.xz|dmg)$' | first
+                let arch = if $row.arch == "arm64" { "aarch64" } else { "x86_64" }
+                let os = if $row.os == "macos" { "darwin" } else { "linux" }
+                $"($arch)-($os)"
             }
-
-            def fetch-release [repository: string]: nothing -> list {
-              let release = try { http get $"https://api.github.com/repos/($repository)/releases/latest" } catch { |err|
-                print --stderr $"($repository): /releases/latest failed"
-                print --stderr $err.rendered
-                exit 1
-              }
-
-              $release.assets
-              | each {|asset| {
+            
+            def fetch-release [repository: string]: nothing -> list<any> {
+                let release = try {
+                    http get $"https://api.github.com/repos/($repository)/releases/latest"
+                } catch {|err|
+                    print --stderr $"($repository): /releases/latest failed"
+                    print --stderr $err.rendered
+                    exit 1
+                }
+                $release.assets
+                | each {|asset| {
                 name: $asset.name,
                 version: $release.tag_name,
-                url: $asset.browser_download_url
+                url: $asset.browser_download_url,
               } }
             }
-
-            def main [path: path] {
-              let olds = try { open --raw $path | from json } catch { {} }
-
-              ((fetch-release "imputnet/helium-linux") ++ (fetch-release "imputnet/helium-macos")
-
-              # Filter-map the name field into a system field.
-              | insert system {|asset| try { asset-to-system $asset.name } } | where system != null | reject name
-
-              # Decide whether to use the new or old etag and thus hash for the item.
-              | par-each --keep-order {|new|
-                let old = $olds | get --optional $new.system
-
-                let new_etag = http head $new.url
-                  | where { ($in.name | str downcase) == "etag" }
-                  | get --optional 0.value
-                let old_etag = $old.etag?
-
-                if $new_etag == $old_etag and $new_etag != null {
-                  print --stderr $"($new.system): unchanged"
-
-                  $new | merge { hash: $old.hash, etag: $old_etag }
-                } else {
-                  print --stderr $"($new.system): fetching"
-
-                  let new_hash = ^${getExe pkgs.nix} store prefetch-file --json $new.url | from json | get hash
-                  $new | merge { hash: $new_hash, etag: $new_etag }
+            
+            def fetch-beta-release [repository: string]: nothing -> list<any> {
+                let beta_release = try {
+                    http get $"https://api.github.com/repos/($repository)/releases"
+                } catch {|err|
+                    print --stderr $"https://api.github.com/repos/($repository)/releases failed"
+                    # print --stderr $"($repository): /releases failed"
+                    print --stderr $err.rendered
+                    exit 1
                 }
-              }
-
-              # Turn into a record keyed by the system.
-              | each {|item| { ($item.system): ($item | reject system) } } | into record
-
-              # Merge it into existing old.
-              | collect {|news| $olds | merge $news }
-
+            
+                $beta_release | first | get assets | each {
+                    |asset| {
+                        name: $asset.name,
+                        version: ($beta_release.tag_name | first)
+                        url: $asset.browser_download_url,
+                    }
+                }
+            }
+            
+            def updated_versions [olds: any, new: any]: nothing -> record {
+                ( $new
+                # Filter-map the name field into a system field.
+                | insert system {|asset| try { asset-to-system $asset.name } } | where system != null | reject name
+            
+                # Decide whether to use the new or old etag and thus hash for the item.
+                | par-each --keep-order {|new|
+                let old = $olds | get --optional $new.system
+            
+                echo $'new url: (http head $new.url)'
+            
+                let new_etag = http head $new.url
+                    | where { ($in.name | str lowercase) == "etag" }
+                    | get --optional 0.value
+                let old_etag = $old.etag?
+                if $new_etag == $old_etag and $new_etag != null {
+                    print --stderr $"($new.system): unchanged"
+            
+                    $new | merge { hash: $old.hash, etag: $old_etag }
+                } else {
+                    print --stderr $"($new.system): fetching"
+                    # TODO: Remove offline
+                    let new_hash = ^${lib.getExe pkgs.nix} store prefetch-file --offline --json $new.url | from json | get hash
+                    $new | merge { hash: $new_hash, etag: $new_etag }
+                }
+                }
+            
+                # Turn into a record keyed by the system.
+                | each {|item| {
+                    ($item.system): ($item | reject system)
+                } } | into record)
+            }
+            
+            def main [path: path] {
+                let old = try {
+                    open --raw $path | from json
+                } catch { {} }
+                
+                let old_betas = try {
+                    $old | items {|system, value| {($system): $value.beta} } | into record
+                } catch { {} }
+            
+                let betas = updated_versions $old_betas (
+                    (fetch-beta-release "imputnet/helium-linux") ++ (fetch-beta-release "imputnet/helium-macos")
+                ) | items {|system, value| {$system: {beta: $value}}  } | into record
+            
+                ( updated_versions $old (
+                      (fetch-release "imputnet/helium-linux") ++ (fetch-release "imputnet/helium-macos")
+                  ) | items {|system, value| {($system): ($value | merge ($betas | get $system))} } | into record
               # Save.
               | to json | save --force $path)
             }
