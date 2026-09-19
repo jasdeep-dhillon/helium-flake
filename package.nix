@@ -28,7 +28,7 @@
   mesa,
   cairo,
   pango,
-  systemd,
+  systemdLibs,
   alsa-lib,
   libdrm,
   libGL,
@@ -90,7 +90,7 @@ stdenv.mkDerivation {
     mesa
     cairo
     pango
-    systemd
+    systemdLibs
     alsa-lib
     libdrm
     qt6.qtbase
