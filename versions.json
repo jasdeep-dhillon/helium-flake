@@ -29,10 +29,10 @@
     "hash": "sha256-QY5zOYBxYcvaxC26cFIGeZcFdtUPWqTzCj8IYv60odk=",
     "etag": "\"0x8DF1A266F7E6B52\"",
     "beta": {
-      "version": "0.18.1.1",
-      "url": "https://github.com/imputnet/helium-macos/releases/download/0.18.1.1/helium_0.18.1.1_arm64-macos.dmg",
-      "hash": "sha256-QY5zOYBxYcvaxC26cFIGeZcFdtUPWqTzCj8IYv60odk=",
-      "etag": "\"0x8DF1A266F7E6B52\""
+      "version": "0.18.2.1",
+      "url": "https://github.com/imputnet/helium-macos/releases/download/0.18.2.1/helium_0.18.2.1_arm64-macos.dmg",
+      "hash": "sha256-hpgtjfNA1aG/Ggx2raM9fSZ5fGw0JKRK+mdhWbaj4+s=",
+      "etag": "\"0x8DF1EF76BE347DE\""
     }
   },
   "x86_64-darwin": {
@@ -41,10 +41,10 @@
     "hash": "sha256-bjWOsCgopWjfcNLNE67U9vfbI4lsEXh6wbnGIbxdbjQ=",
     "etag": "\"0x8DF1A2670102F04\"",
     "beta": {
-      "version": "0.18.1.1",
-      "url": "https://github.com/imputnet/helium-macos/releases/download/0.18.1.1/helium_0.18.1.1_x86_64-macos.dmg",
-      "hash": "sha256-bjWOsCgopWjfcNLNE67U9vfbI4lsEXh6wbnGIbxdbjQ=",
-      "etag": "\"0x8DF1A2670102F04\""
+      "version": "0.18.2.1",
+      "url": "https://github.com/imputnet/helium-macos/releases/download/0.18.2.1/helium_0.18.2.1_x86_64-macos.dmg",
+      "hash": "sha256-kw+afHxkyGCXaKyWC5vn2btt6GrTUe1n4ZGMSwL9/KE=",
+      "etag": "\"0x8DF1EF76BE0172D\""
     }
   }
 }
