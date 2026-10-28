@@ -5,10 +5,10 @@
     "hash": "sha256-IRqV4Qlg1is3Z1GSD7uTzf8FH1v8+hNrUulw9OaWNXc=",
     "etag": "\"0x8DF2F806E9B5586\"",
     "beta": {
-      "version": "0.20.1.1",
-      "url": "https://github.com/imputnet/helium-linux/releases/download/0.20.1.1/helium-0.20.1.1-arm64_linux.tar.xz",
-      "hash": "sha256-IRqV4Qlg1is3Z1GSD7uTzf8FH1v8+hNrUulw9OaWNXc=",
-      "etag": "\"0x8DF2F806E9B5586\""
+      "version": "0.20.2.1",
+      "url": "https://github.com/imputnet/helium-linux/releases/download/0.20.2.1/helium-0.20.2.1-arm64_linux.tar.xz",
+      "hash": "sha256-x6tF6ElhqgESQErE7yvj2oLRucivYLhVVzmBIvp8vGY=",
+      "etag": "\"0x8DF34F287F9BD7C\""
     }
   },
   "x86_64-linux": {
@@ -17,10 +17,10 @@
     "hash": "sha256-ICP6RM76D70+GQcch+kNYSdfCLqPW0jVjCNSFVZem1M=",
     "etag": "\"0x8DF2F806ED9B756\"",
     "beta": {
-      "version": "0.20.1.1",
-      "url": "https://github.com/imputnet/helium-linux/releases/download/0.20.1.1/helium-0.20.1.1-x86_64_linux.tar.xz",
-      "hash": "sha256-ICP6RM76D70+GQcch+kNYSdfCLqPW0jVjCNSFVZem1M=",
-      "etag": "\"0x8DF2F806ED9B756\""
+      "version": "0.20.2.1",
+      "url": "https://github.com/imputnet/helium-linux/releases/download/0.20.2.1/helium-0.20.2.1-x86_64_linux.tar.xz",
+      "hash": "sha256-upKssn7GzaNqi5SOIVQAmq7g1jMiKtJEviXnNqFD5vo=",
+      "etag": "\"0x8DF34F28804ADA7\""
     }
   },
   "aarch64-darwin": {
